@@ -4,7 +4,9 @@ const cors = require('cors');
 require('dotenv').config();
 const flightRoutes = require('./routes/flights');
 const vendorRoutes = require('./routes/vendors');
-
+const quotationRoutes = require('./routes/Quotations');
+const userRouter = require('./routes/users');
+const flightCarrierRoutes = require('./routes/flightCarrierRoutesmasters');
 
 
 const app = express();
@@ -20,12 +22,12 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Routes
 app.use('/api/users', require('./routes/users'));
-
 app.use('/api/hotels', require('./routes/hotels'));
 app.use('/api/flights', flightRoutes);
 app.use('/api/vendors', vendorRoutes);
-
-
+app.use('/api/quotations', quotationRoutes);
+app.use('/api/users', userRouter);
+app.use('/api/flight-carriers', flightCarrierRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

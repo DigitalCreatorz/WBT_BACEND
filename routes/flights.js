@@ -3,6 +3,15 @@ const router = express.Router();
 const Flight = require('../models/Flight');
 const User = require('../models/User');
 
+router.get('/user/:userId', async (req, res) => {
+  try {
+    const flights = await Flight.find({ user: req.params.userId }).select('FbookingId from to departureDate returnDate tripType class adults children infants specialInstructions');
+    res.json(flights);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 router.post('/', async (req, res) => {
   try {
     const user = await User.findById(req.body.user);
