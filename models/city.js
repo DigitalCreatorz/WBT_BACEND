@@ -1,7 +1,9 @@
-
 const mongoose = require('mongoose');
-const citySchema = new mongoose.Schema({
+
+// Check if the model is already compiled to avoid OverwriteModelError
+const City = mongoose.models.City || mongoose.model('City', new mongoose.Schema({
   name: { type: String, required: true, unique: true },
   createdAt: { type: Date, default: Date.now }
-});
-module.exports = mongoose.model('City', citySchema);
+}));
+
+module.exports = City;

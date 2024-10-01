@@ -1,20 +1,19 @@
-// routes/city.js
 const express = require('express');
 const router = express.Router();
-const City = require('../models/city');
+const City = require('../models/City');
 
 // Get all cities
-router.get('/cities', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const cities = await City.find().select('name');
-    res.json(cities.map(city => city.name));
+    res.json(cities);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
 // Add a new city
-router.post('/cities', async (req, res) => {
+router.post('/', async (req, res) => {
   const city = new City({
     name: req.body.name
   });
