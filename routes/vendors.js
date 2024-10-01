@@ -35,7 +35,8 @@
 
 const express = require('express');
 const router = express.Router();
-const vendorController = require('../controllers/vendorControllers');
+// const vendorController = require('../controllers/vendorControllers');
+const vendorController = require('../controllers/vendorcontrollers');
 
 router.post('/', vendorController.createVendor);
 router.get('/', vendorController.getVendors);
