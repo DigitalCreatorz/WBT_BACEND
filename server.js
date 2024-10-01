@@ -49,6 +49,7 @@ app.use('/api/vendors', vendorRoutes);
 app.use('/api/quotations', quotationRoutes);
 app.use('/api/users', userRouter);
 app.use('/api/flight-carriers', flightCarrierRoutes);
+
 app.use('/api/attractions', attractionRoutes);
 app.use('/api', hotelMasterRoutes);
 app.use('/api/cities', cityRoutes);
