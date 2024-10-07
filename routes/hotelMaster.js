@@ -57,4 +57,29 @@ router.delete('/hotelsmaster/:id', async (req, res) => {
   }
 });
 
+// City suggestions
+router.get('/cities', async (req, res) => {
+  try {
+    const { query } = req.query;
+    const cities = await HotelMaster.distinct('city', { city: new RegExp(query, 'i') });
+    res.json(cities.map(city => ({ name: city })));
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// Hotel suggestions
+router.get('/hotels', async (req, res) => {
+  try {
+    const { city, query } = req.query;
+    const hotels = await HotelMaster.find({ 
+      city: city, 
+      name: new RegExp(query, 'i') 
+    }).select('name');
+    res.json(hotels);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 module.exports = router;

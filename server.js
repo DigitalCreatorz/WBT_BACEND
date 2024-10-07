@@ -13,6 +13,8 @@ const flightCarrierRoutes = require('./routes/flightCarrierRoutesmasters');
 const attractionRoutes = require('./routes/attractions');
 const hotelMasterRoutes = require('./routes/hotelMaster');
 const cityRoutes = require('./routes/city');
+const packageRoutes = require('./routes/packageRoutes');
+
 
 
 
@@ -27,7 +29,8 @@ cloudinary.config({
 });
 
 // Middleware
-app.use(cors());
+app.use(cors({    origin: '*', // Allow all origins or specify your app's origin
+}));
 app.use(express.json());
 
 // Create uploads directory if it doesn't exist
@@ -52,6 +55,7 @@ app.use('/api/flight-carriers', flightCarrierRoutes);
 app.use('/api/attractions', attractionRoutes);
 app.use('/api', hotelMasterRoutes);
 app.use('/api/cities', cityRoutes);
+app.use('/api/packages', packageRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

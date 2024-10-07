@@ -44,5 +44,7 @@ router.get('/:id', vendorController.getVendor);
 router.put('/:id', vendorController.updateVendor);
 router.delete('/:id', vendorController.deleteVendor);
 router.put('/:id/restore', vendorController.restoreVendor);
+router.get('/service/:service', vendorController.getVendorsByService);
+
 
 module.exports = router;

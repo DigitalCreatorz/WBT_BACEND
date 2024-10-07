@@ -35,6 +35,25 @@ router.get('/', async (req, res) => {
   }
 });
 
+// get attractioons of each city 
+router.get('/names-by-city/:city', async (req, res) => {
+  try {
+    const cityName = req.params.city;  // Use req.params.city to get the city name from URL
+    const attractions = await Attraction.find({ 
+      city: cityName, 
+      isDeleted: false 
+    }, 'name');
+    
+    const attractionNames = attractions.map(attraction => attraction.name);
+    res.json(attractionNames);
+  } catch (error) {
+    console.error('Error fetching attraction names:', error);
+    res.status(500).json({ message: 'An error occurred while fetching attraction names', error: error.message });
+  }
+});
+
+
+
 // POST a new attraction
 router.post('/', upload.single('photo'), async (req, res) => {
   try {
@@ -66,6 +85,22 @@ router.get('/deleted', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+// Get distinct city names where isDeleted is false
+router.get('/', async (req, res) => {
+  try {
+    const attractions = await Attraction.find({ isDeleted: false }).distinct('city');
+    
+    console.log('Cities being sent:', attractions); // Log the data being sent
+    res.json(attractions);
+  } catch (error) {
+    console.error('Error fetching cities:', error);
+    res.status(500).send('Error fetching cities');
+  }
+});
+
+
+
 
 // GET a single attraction
 router.get('/:id', getAttraction, (req, res) => {
@@ -125,6 +160,8 @@ router.delete('/:id', getAttraction, async (req, res) => {
   }
 });
 
+
+
 // Restore a deleted attraction
 router.post('/:id/restore', getAttraction, async (req, res) => {
   try {
@@ -136,6 +173,8 @@ router.post('/:id/restore', getAttraction, async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+
 
 // Middleware function to get attraction by ID
 async function getAttraction(req, res, next) {
