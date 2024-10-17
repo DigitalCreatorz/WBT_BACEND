@@ -7,13 +7,14 @@ const fs = require('fs');
 const cloudinary = require('cloudinary').v2;
 const flightRoutes = require('./routes/flights');
 const vendorRoutes = require('./routes/vendors');
-const quotationRoutes = require('./routes/Quotations');
+
 const userRouter = require('./routes/users');
 const flightCarrierRoutes = require('./routes/flightCarrierRoutesmasters');
 const attractionRoutes = require('./routes/attractions');
 const hotelMasterRoutes = require('./routes/hotelMaster');
 const cityRoutes = require('./routes/city');
 const packageRoutes = require('./routes/packageRoutes');
+const quotations = require('./routes/quotation');
 
 
 
@@ -49,13 +50,14 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/hotels', require('./routes/hotels'));
 app.use('/api/flights', flightRoutes);
 app.use('/api/vendors', vendorRoutes);
-app.use('/api/quotations', quotationRoutes);
 app.use('/api/users', userRouter);
 app.use('/api/flight-carriers', flightCarrierRoutes);
 app.use('/api/attractions', attractionRoutes);
 app.use('/api', hotelMasterRoutes);
 app.use('/api/cities', cityRoutes);
 app.use('/api/packages', packageRoutes);
+app.use('/api/quotations', quotations);
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

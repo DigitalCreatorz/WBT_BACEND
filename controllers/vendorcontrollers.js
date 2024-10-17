@@ -1,5 +1,4 @@
 
-
 const Vendor = require('../models/vendor');
 
 const createVendor = async (req, res) => {
@@ -20,6 +19,8 @@ const getVendors = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
 
 const getDeletedVendors = async (req, res) => {
   try {
@@ -80,6 +81,8 @@ const getVendorsByService = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
 
 module.exports = {
   createVendor,
